@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\FakultasController;
+use App\Http\Controllers\JurusanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,14 @@ Route::get('/fakultas', [FakultasController::class, 'index'])->name('fakultas');
 Route::post('/tambah_fakultas', [FakultasController::class, 'tambah_data'])->name('tambah_fakultas');
 Route::post('/update_fakultas', [FakultasController::class, 'update_data'])->name('update_fakultas');
 Route::get('/hapus_fakultas/{id}', [FakultasController::class, 'hapus_data'])->name('hapus_fakultas');
-Route::get('/anggota', [AnggotaController::class, 'index']);
+Route::get('/jurusan', [JurusanController::class, 'index'])->name('jurusan');
+Route::post('/tambah_jurusan', [JurusanController::class, 'tambah_data'])->name('tambah_jurusan');
+Route::post('/update_jurusan', [JurusanController::class, 'update_data'])->name('update_jurusan');
+Route::get('/hapus_jurusan/{id}', [JurusanController::class, 'hapus_jurusan'])->name('hapus_jurusan');
+
+
+
+Route::get('/anggota', [AnggotaController::class, 'index'])->name("anggota");
 Route::get('/anggota/create', [AnggotaController::class, 'create']);
 Route::post('/anggota/store', [AnggotaController::class, 'store']);
 Route::get('/anggota/{id}/edit', [AnggotaController::class, 'edit']);

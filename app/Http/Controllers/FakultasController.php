@@ -19,7 +19,7 @@ class FakultasController extends Controller
         $data = ["nama_fakultas" => $request->nama_fakultas];
 
         Fakultas::create($data);
-        Alert::success('Success Title', 'Berhasil Tambah Data');
+        Alert::success('Success Title', 'Berhasil Tambah Data');//menampilkan notifikasi dengan sweetalert plugin
         return back();
     }
     public function update_data(Request $request)

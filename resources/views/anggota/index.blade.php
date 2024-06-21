@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -47,4 +47,53 @@
    
 </body>
 </html>
+ --}}
 
+
+
+ @extends('templating.main')
+@section('content')
+<div class="card mb-4">
+    <div class="card-body">
+        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            tambah data
+          </button>
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Nim</th>
+                    <th>Fakultas</th>
+                    <th>Jurusan</th>
+                    <th>jenis_kelamin</th>
+                    <th>Jabatan</th>
+                 
+                    <th>aksi</th>
+                </tr>
+            </thead>
+           
+            <tbody>
+                @php
+                 $i=1;   
+                @endphp
+                @foreach ($anggota as $item)
+                    
+               
+                <tr>
+                    <td>{{ $i++ }}</td>
+                    <td>{{ $item->Nama }}</td>
+                    <td>{{ $item->Nim }}</td>
+                    <td>{{ $item->jurusan->fakultas->nama_fakultas }}</td>
+                    <td>{{ $item->jurusan->nama_jurusan }}</td>
+                    <td><button class="btn btn-danger" onclick="hapus({{ $item->id }})">hapus</button>|<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit" onclick="edit({{ $item }})">
+                        edit data
+                      </button></td>
+                 
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
+@endsection

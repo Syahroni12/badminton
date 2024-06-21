@@ -7,8 +7,16 @@
                 Dashboard
             </a>
             <a class="nav-link {{ Route::is('fakultas') ? 'active' : '' }}" href="{{ route('fakultas') }}">
-                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                 Fakultas
+            </a>
+            <a class="nav-link {{ Route::is('jurusan') ? 'active' : '' }}" href="{{ route('jurusan') }}">
+                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                Jurusan
+            </a>
+            <a class="nav-link {{ Route::is('anggota') ? 'active' : '' }}" href="{{ route('anggota') }}">
+                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                Data Anggota
             </a>
             
             

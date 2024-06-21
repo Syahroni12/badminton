@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 class AnggotaController extends Controller
 {
     public function index(){
-        $anggota = Anggota ::all();
-        return view('anggota.index', compact(['anggota']));
+        $title="Data Anggota";
+        $anggota = Anggota ::with('jurusan','user')->get();//berfungsi memanggil data anggota dengan nama relasi jurusan dan user
+        return view('anggota.index', compact(['anggota','title']));
     }
 
     public function create(){
