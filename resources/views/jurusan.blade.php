@@ -80,7 +80,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-        <form action="{{ route('update_fakultas') }}" method="post">
+        <form action="{{ route('update_jurusan') }}" method="post">
 
       @csrf
       <div class="mb-3">

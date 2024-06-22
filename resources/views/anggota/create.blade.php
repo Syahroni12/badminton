@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -27,4 +27,126 @@
 
     </form>
 </body>
-</html>
+</html> --}}
+
+@extends('templating.main')
+@section('content')
+    <div class="card mb-4">
+        <div class="card-body">
+
+            <form action="{{ route('anggota.store') }}" method="post">
+                @csrf
+
+                <label for="Nama-Anggota" class="form-label">Nama Anggota</label>
+                <div class="input-group mb-3">
+
+                    <input type="text" class="form-control" id="Nama-Anggota" name="Nama" value="{{ old('Nama') }}">
+                </div>
+                <label for="Nim" class="form-label">Nim Anggota</label>
+                <div class="input-group mb-3">
+
+                    <input type="text" class="form-control" id="Nim" name="Nim" value="{{ old('Nim') }}">
+                </div>
+                <label for="fakultas" class="form-label">Fakultas</label>
+               
+                <div class="input-group mb-3">
+              
+                <select class="form-select" aria-label="Default select example" id="fakultas" name="fakultas_id" >
+                  <option selected>Pilih Fakultas</option>
+                  @foreach ($fakultas as $item)
+                      
+                  <option value="{{ $item->id }}">{{ $item->nama_fakultas }}</option>
+                  @endforeach
+               
+                </select>
+                </div>
+                <label for="id_jurusan" class="form-label">Jurusan</label>
+                <div class="input-group mb-3">
+                <select class="form-select" aria-label="Default select example" id="id_jurusan" name="id_jurusan" >
+                  <option selected>Pilih jurusan</option>
+                
+                      
+                  <option value=""></option>
+                 
+               
+                </select>
+                </div>
+                <label for="jenis_kel" class="form-label">Jenis Kelamin</label>
+                <div class="input-group mb-3">
+                <select class="form-select" aria-label="Default select example" id="jenis_kel" name="jenis_kelamin" >
+                  <option selected> Jenis Kelamin</option>
+                
+                      
+                  <option value="L">L</option>
+                  <option value="P">P</option>
+                 
+               
+                </select>
+                </div>
+                <label for="kedudukan" class="form-label">Kedudukan</label>
+                <div class="input-group mb-3">
+                <select class="form-select" aria-label="Default select example" id="keduduka" name="kedudukan" >
+                  <option selected>Pilih kedudukan</option>
+                
+                      
+                  <option value="ketua">ketua</option>
+                  <option value="wakil">wakil</option>
+                  <option value="bendahara">bendahara</option>
+                  <option value="sekretaris">sekretaris</option>
+                  <option value="anggota">anggota</option>
+                 
+               
+                </select>
+                </div>
+                <label for="email" class="form-label">email Anggota</label>
+                <div class="input-group mb-3">
+
+                    <input type="text" class="form-control" id="email" name="email" value="{{ old('email') }}">
+                </div>
+
+
+
+
+
+                
+                <button class="btn btn-primary" type="submit">Tambah</button>
+                <a href="{{ route('anggota') }}" class="btn btn-danger">Batal</a>
+
+            </form>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Event listener untuk perubahan pilihan fakultas
+            $('#fakultas').on('change', function() {
+                var fakultas_id = $(this).val();
+
+                // Bersihkan pilihan jurusan saat fakultas berubah
+                $('#id_jurusan').html('<option selected>Pilih Jurusan</option>');
+
+                // Jika fakultas dipilih, lakukan AJAX request untuk mendapatkan jurusan
+                if (fakultas_id) {
+                    $.ajax({
+                        url: '/jurusan/' + fakultas_id,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data.length > 0) {
+                                // Tambahkan pilihan jurusan yang diterima dari server
+                                $.each(data, function(key, jurusan) {
+                                    $('#id_jurusan').append('<option value="' + jurusan.id + '">' + jurusan.nama_jurusan + '</option>');
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('AJAX Error:', status, error);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+@endsection

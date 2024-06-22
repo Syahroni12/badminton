@@ -55,9 +55,7 @@
 @section('content')
 <div class="card mb-4">
     <div class="card-body">
-        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            tambah data
-          </button>
+       <a href="{{ route('tambah_anggota') }}" class="btn btn-primary">Tambah Anggota</a>
         <table id="datatablesSimple">
             <thead>
                 <tr>
@@ -68,6 +66,7 @@
                     <th>Jurusan</th>
                     <th>jenis_kelamin</th>
                     <th>Jabatan</th>
+                    <th>Email</th>
                  
                     <th>aksi</th>
                 </tr>
@@ -86,9 +85,10 @@
                     <td>{{ $item->Nim }}</td>
                     <td>{{ $item->jurusan->fakultas->nama_fakultas }}</td>
                     <td>{{ $item->jurusan->nama_jurusan }}</td>
-                    <td><button class="btn btn-danger" onclick="hapus({{ $item->id }})">hapus</button>|<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit" onclick="edit({{ $item }})">
-                        edit data
-                      </button></td>
+                    <td>{{ $item->jenis_kelamin }}</td>
+                    <td>{{ $item->kedudukan }}</td>
+                    <td>{{ $item->user->email }}</td>
+                    <td><button class="btn btn-danger" onclick="hapus({{ $item->id }})">hapus</button>|<a href="{{ route('anggota.edit', $item->id) }}" class="btn btn-warning">Edit</a></td>
                  
                 </tr>
                 @endforeach
@@ -96,4 +96,30 @@
         </table>
     </div>
 </div>
+
+<script>
+        function hapus(id) {
+            Swal.fire({
+                title: "Apakah Kamu Yakin?",
+                text: "Apakah Kamu Yakin Ingin Menghapus Data?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                cancelButtonText: "Batal",
+                confirmButtonText: "Ya"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // console.log(id);
+                    window.location.href = `/hapus_anggota/${id}`;
+                    // window.location.href = "/selesaikan/".itemId "";
+                    // Swal.fire({
+                    //     title: "Deleted!",
+                    //     text: "Your file has been deleted.",
+                    //     icon: "success"
+                    // });
+                }
+            });
+        }
+</script>
 @endsection
